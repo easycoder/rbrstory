@@ -14,7 +14,7 @@ The first thing to do is to flash the computer with Linux. The manufacturer of t
 
 ## Setting up an IXHUB as a Linux English computer ##
 
-The IXHUB is an industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies instructions at https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
+The IXHUB is an industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies instructions at [https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view](https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
 
 Once this job is done, the computer will boot up in Linux. However, the problem for an English or American user is that the system is all in Chinese. So here is what to do.
 

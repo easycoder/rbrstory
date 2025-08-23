@@ -16,4 +16,3 @@ On the next page I'll describe the system architecture, both physical and softwa
 
 ~tid:architecture:System architecture~
 
-~sid:RBR:Room By Room~
