@@ -12,14 +12,12 @@ Whatever computer is used, the software assumes it will be oriented in potrait m
 
 The first thing to do is to flash the computer with Linux. The manufacturer of the IXHUB provides instructions on how to do this; the instructions and the relevant files are all in our repository. There are a number of other steps to take; here is a complete set of instructions.
 
-## Setting up an IXHUB as a Linux English computer ##
-
 The IXHUB is an industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies instructions at [https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view](https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
 
 Once this job is done, the computer will boot up in Linux. However, the problem for an English or American user is that the system is all in Chinese. So here is what to do.
 
 First connect a keyboard and a mouse to the computer. Use one or both of the ports marked USB.
-Click the internet icon on the right of the task bar at the top of the screen. Select your router from the list and supply the password. Now click the application selector button at the left-hand end of the taskbar and look for the console application, which has an icon showing a black window. In this, type
+Click the internet icon on the right of the task bar at the top of the screen. Select your router from the list and supply the password. Now go to the bottom of the screen and look for the console application, which has an icon showing a black window. Click to open it, then type
 ```
 ip a
 ```
@@ -88,7 +86,7 @@ cd rbr
 wget https://rbrheating.com/ui/setup
 sh setup
 ```
-When this runs it first asks for a new password, to replace 'linaro'. Then it performs a complete system update (it will ask for the new password again) and fetches/installs everything it will need. This can all take some time so be patient. At the end, the system restarts itself and you an then log in again as 'linaro' but with your new password.
+When this runs it first asks for a new password, to replace 'linaro'. Then it performs a complete system update (it will ask for the new password again) and fetches/installs everything it will need. This can all take some time so be patient. At the end, the system restarts itself and you can then log in again as 'linaro' but with your new password.
 
 At this point the RBR system will be running its main script. The script is called `rbr.ecs` and it runs every 60 seconds as a `cron` task.
 

@@ -6,7 +6,7 @@ Each room also has a thermometer, of which there are currently 2 kinds. One is a
 
 To control these devices there is a system controller; a small computer that connects to the devices and to the Internet via the house router.
 
-The system includes a user interface, that runs either locally or remotely over the Internet, or both. The local version, if provided, runs on the system controller, and the remote version is designed to run on a smartphone connected to the RBR website. Both give a view of the current system status, with temperature and timing information for each room, and the ability configure the system as and when needed.
+The system includes a user interface, that runs either locally or remotely over the Internet, or both. The local version, if provided, runs on the system controller, and the remote version is designed to run on a smartphone connected to the RBR website. Both give a view of the current system status, with temperature and timing information for each room, and the ability to configure the system as and when needed.
 
 ## The system ##
 
