@@ -629,7 +629,8 @@ SetStyles:
     begin
 !        multiply FontSize by 5
 !        divide FontSize by 4
-        divide FontSize by 2
+        multiply FontSize by 2
+        divide FontSize by 3
         set style `line-height` of Container to `140%`
     end
     set style `font-size` of Container to FontSize cat `px`
