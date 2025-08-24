@@ -186,7 +186,8 @@
 
 !	View a record, given its Subject and Topic ids.
 ViewRecord:
-	if not Mobile scroll TopicText to 0
+!	if not Mobile scroll TopicText to 0
+	scroll TopicText to 0
     rest get Record from Stories cat SID cat `/content.txt?v=` cat now
     or begin
     	put `home` into SID
@@ -629,8 +630,8 @@ SetStyles:
     begin
 !        multiply FontSize by 5
 !        divide FontSize by 4
-        multiply FontSize by 2
-        divide FontSize by 3
+        multiply FontSize by 3
+        divide FontSize by 4
         set style `line-height` of Container to `140%`
     end
     set style `font-size` of Container to FontSize cat `px`
