@@ -13,3 +13,5 @@ A computer project of any size gets complex rather quickly. One way of dealing w
 ~stid:software/webserver:The web server~
 
 ~stid:software/webapp:The web application~
+
+~stid:home/pagelist:List of Pages
