@@ -1,4 +1,4 @@
-# Room By Room #
+# The Room By Room system #
 
 Room By Room is a distributed appliance that replaces a traditional central heating controller (programmer). Each radiator is fitted with a electrically-operated valve, which in many cases replaces an existing thermostatic radiator valve (TRV). Fitting is just a matter of unscrewing (by hand) the TRV head and replacing it with the electrical head. This has a cable that goes to a small control box which in turn goes to a standard mains outlet. The control box is described below.
 
@@ -10,10 +10,11 @@ The system includes a user interface, that runs either locally or remotely over 
 
 A Room By Room system comprises one system controller and a number of devices to be controlled, as follows.
 
-## ~tid:controller:The system controller~ ## is a small Linux computer. It is possible to use a device such as a Raspberry Pi or similar, but we have found them to be unreliable in the long term if they use an SD card for data storage. If the power is lost unexpectedly the computer can corrupt the SD card, making it unusable without a complete reinstall. For this reason we prefer a mini PC of some kind or other, with SSD storage. If this comes with a display then we can provide a user interface program to run on it; otherwise the only way to control the system is over the Internet with a smartphone or PC.
+### ~tid:controller:The system controller~ ###
+This is a small Linux computer. It is possible to use a device such as a Raspberry Pi or similar, but we have found them to be unreliable in the long term if they use an SD card for data storage. If the power is lost unexpectedly the computer can corrupt the SD card, making it unusable without a complete reinstall. For this reason we prefer a mini PC of some kind or other, with SSD storage. If this comes with a display then we can provide a user interface program to run on it; otherwise the only way to control the system is over the Internet with a smartphone or PC.
 
-## The ~tid:relay:relay module~ ## is based on the ESP32 microcontroller. It communicates with the system controller using wifi.
+### The ~tid:relay:relay module~ ###
+This is based on the ESP32 microcontroller. It communicates with the system controller using wifi.
 
-## ~tid:thermometer:Thermometer modules~ ## come in two kinds. The battery-powered thermometer communicates with the system using Bluetooth. Batteries usually need to be changed at roughly yearly intervals. The mains-powered version needs no battery changes; it plugs into a nearby mains socket outlet and communicates using wifi.
-
-
+### ~tid:thermometer:Thermometer modules~ ###
+These come in two kinds. The battery-powered thermometer communicates with the system using Bluetooth. Batteries usually need to be changed at roughly yearly intervals. The mains-powered version needs no battery changes; it plugs into a nearby mains socket outlet and communicates using wifi.

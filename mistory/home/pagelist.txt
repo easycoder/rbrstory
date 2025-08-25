@@ -1,0 +1,15 @@
+# List of Pages
+
+~stid:home|content:Introduction~
+
+~stid:home|architecture:System architecture~
+
+## The Room By Room hardware ##
+
+~stid:rbr|content:Introduction~
+
+~stid:rbr|controller:The system controller~
+
+~stid:rbr|relay:The relay module~
+
+~stid:rbr|thermometer:Thermometers~
