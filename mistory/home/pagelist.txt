@@ -1,15 +1,35 @@
 # List of Pages
 
-~stid:home/content:Introduction~
+~sid:home:Introduction~
 
 ~stid:home/architecture:System architecture~
 
 ## The Room By Room hardware ##
 
-~stid:RBR/content:Introduction~
+~sid:hardware:Introduction~
 
-~stid:RBR/controller:The system controller~
+~stid:hardware/controller:The system controller~
 
-~stid:RBR/relay:The relay module~
+~stid:hardware/relay:The relay module~
 
-~stid:RBR/thermometer:Thermometers~
+~stid:hardware/thermometer:Thermometers~
+
+## The Room By Room software ##
+
+~sid:software:Introduction~
+
+~stid:software/controller:The controller software~
+
+~stid:software/devices:The device software~
+
+~stid:software/webserver:The web server~
+
+~stid:software/webapp:The web application~
+
+## Subprojects ##
+
+~sid:EC-PY:EasyCoder for Python~
+
+~sid:EC-JS:EasyCoder for JavaScript~
+
+~sid:Storyteller:Storyteller~
