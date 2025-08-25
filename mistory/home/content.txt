@@ -1,6 +1,6 @@
-# The Story of a Project
+## ~tid:pagelist:List of Pages~ ##
 
-# ~tid:pagelist:List of Pages~ #
+## Introduction ##
 
 This is the story of a project that started in 2000 with a simple idea - to automate my home central heating. I'd discovered some Internet-Of-Things devices made by a company called Shelly, and two of these devices interested me. One was a relay; the other a thermometer, and both of them had wifi so they could be accessed from any computing device on the local network. I figured I could use them to detect the temperature in each room of the house and control radiator valves to maintain the desired temperatures.
 

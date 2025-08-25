@@ -12,4 +12,4 @@ The specific subprojects are as follows:
 
  4. ~sid:Storyteller:Storyteller~ is a tool for building documents such as this one. It extends MarkDown with some useful additions, making it easy to create complex multi-page text documents with illustrations. It has a website at [https://easycoder.github.io/storyteller](https://easycoder.github.io/storyteller).
 
-~tid:pagelist:List of Pages
+~tid:pagelist:List of Pages~

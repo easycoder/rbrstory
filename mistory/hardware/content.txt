@@ -32,4 +32,4 @@ The system software is distributed among the system controller, the relays and t
 
 ~stid:software/webapp:The web application~
 
-~stid:home/pagelist:List of Pages
+~stid:home/pagelist:List of Pages~

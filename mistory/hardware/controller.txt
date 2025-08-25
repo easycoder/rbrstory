@@ -90,4 +90,4 @@ When this runs it first asks for a new password, to replace 'linaro'. Then it pe
 
 At this point the RBR system will be running its main script. The script is called `rbr.ecs` and it runs every 60 seconds as a `cron` task.
 
-~stid:home/pagelist:List of Pages
+~stid:home/pagelist:List of Pages~
