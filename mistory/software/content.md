@@ -6,12 +6,12 @@ For each part of the system, the choice of language was in part forced on us. A 
 
 A computer project of any size gets complex rather quickly. One way of dealing with this is to bring in a framework of some kind to force structure on the project. I'm not in favour of this because frameworks go out of fashion long before the languages in which they are written. So instead I used a tool that were already in my toolkit; a Domain-Specific Language (DSL). In this project there are two versions of this; one is for the system controller and the other is for the web application that runs on any smartphone. The first of these is written in standard Python, the other in an ES6 flavour of JavaScript. Both keep things as simple as possible. They are each described in the following pages.
 
-~stid:software/controller:The controller software~
+~tid:controller:The controller software~
 
-~stid:software/devices:The device software~
+~tid:devices:The device software~
 
-~stid:software/webserver:The web server~
+~tid:webserver:The web server~
 
-~stid:software/webapp:The web application~
+~tid:webapp:The web application~
 
 ~stid:home/pagelist:List of Pages~
