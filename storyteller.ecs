@@ -188,7 +188,7 @@
 ViewRecord:
 !	if not Mobile scroll TopicText to 0
 	scroll TopicText to 0
-    rest get Record from Stories cat SID cat `/content.txt?v=` cat now
+    rest get Record from Stories cat SID cat `/content.md?v=` cat now
     or begin
     	put `home` into SID
         put `content` into TID
@@ -209,10 +209,10 @@ ViewRecord:
     end
     set the content of TitleDiv to Title
 
-    rest get Topic from Stories cat SID cat `/` cat TID cat `.txt?v=` cat now
+    rest get Topic from Stories cat SID cat `/` cat TID cat `.md?v=` cat now
     or begin
     	put `content` into TID
-        rest get Topic from Stories cat SID cat `/` cat TID cat `.txt?v=` cat now
+        rest get Topic from Stories cat SID cat `/` cat TID cat `.md?v=` cat now
         continue
     end
     
