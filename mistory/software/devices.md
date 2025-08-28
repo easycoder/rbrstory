@@ -31,3 +31,5 @@ The Python scripts are as follows:
 ~tid:server:server.py~ runs a small webserver to accept requests received by the access point.
 
 ~tid:sta:sta.py~ contains all the code for handling station mode (an HTTP client).
+
+~stid:home/pagelist:List of Pages~

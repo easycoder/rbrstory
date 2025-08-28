@@ -18,4 +18,6 @@ If a user interface is provided this is a graphical display running on the contr
 
 Although the user interface runs on the controller it can also run on a PC connected to the same house network as the controller. This is a considerable help while developing the user interface, as it permits debugging to be done, something that is hard to do on the small screen of the controller.
 
+~tid:devices:The device software~
+
 ~stid:home/pagelist:List of Pages~
