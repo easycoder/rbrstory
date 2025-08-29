@@ -74,7 +74,7 @@ ip a show wlan0
 ping -c 4 google.com
 ```
 
-Troubleshooting Tips
+### Troubleshooting Tips ###
 1 Check Logs: If it doesn't work, logs are your best friend. Use journalctl to see what's happening:
 ```
 journalctl -u NetworkManager -f
