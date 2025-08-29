@@ -66,6 +66,7 @@ sudo nmcli connection reload
 sudo nmcli connection up MyNewAP
 ```
 3 At this point, if you are working over SSH you will lose the connection. Reconnect your computer to the same access point as the controller, and login again to the controller.
+
 4 Check that you are connected and have an IP address:
 ```
 nmcli connection show --active
