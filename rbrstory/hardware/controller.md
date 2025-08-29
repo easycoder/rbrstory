@@ -90,4 +90,8 @@ When this runs it first asks for a new password, to replace 'linaro'. Then it pe
 
 At this point the RBR system will be running its main script. The script is called `rbr.ecs` and it runs every 60 seconds as a `cron` task.
 
+## Changing the router ##
+
+If you change your router you will need to reconfigure the system, and this can't be done on the controller GUI as the machine most likely doesn't have a keyboard. Instructions on how to proceed can be found ~tid:router:here~
+
 ~stid:home/pagelist:List of Pages~

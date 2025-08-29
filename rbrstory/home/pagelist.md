@@ -20,6 +20,8 @@
 
 ~stid:software/controller:The controller software~
 
+&emsp;~stid:software/router:Changing the router~
+
 ~stid:software/devices:The device software~
 
 &emsp;~stid:software/ap:ap.py Access point~
