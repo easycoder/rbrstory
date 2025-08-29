@@ -2,6 +2,13 @@
 
 The RBR system controller is a small Linux PC with a portrait-oriented display. (The latter part is optional.) It runs one or both of the following applications:
 
+## The user interface ##
+If a user interface is provided this is a graphical display running on the controller. Python graphics are comprehensive and elegant but not something for a novice to get to grips with. Fortunately I was able to extend EasyCoder to handle this task, being to construct a display of the system status and to allow interaction with it.
+
+Although the user interface runs on the controller it can also run on a PC connected to the same house network as the controller. This is a considerable help while developing the user interface, as it permits debugging to be done, something that is hard to do on the small screen of the controller.
+
+~tid:ui:The user interface software~
+
 ## The controller #
 The job of the controller is to continuously monitor the thermometers in each of the rooms being controlled and to turn on or off relays that drive radiator valves. This job is in essence a large pile of if...then...else statements, with the frequent need to transfer control to arbitrary points in the code. This kind of thing is not a good match for structured programming, which makes it hard if not impossible to implement the simple GOTO needed.
 
@@ -12,11 +19,6 @@ When I started this project I already had such a language, having written it a f
 ~sid:EC-PY:EasyCoder for Python~
 
 There are significant advantages in using EasyCoder rather than Python, the main one being it's much easier to read the program script, even if you're not already familiar with it. Most of it is fairly obvious.
-
-## The user interface ##
-If a user interface is provided this is a graphical display running on the controller. Python graphics are comprehensive and elegant but not something for a novice to get to grips with. Fortunately I was able to extend EasyCoder to handle this task, being to construct a display of the system status and to allow interaction with it.
-
-Although the user interface runs on the controller it can also run on a PC connected to the same house network as the controller. This is a considerable help while developing the user interface, as it permits debugging to be done, something that is hard to do on the small screen of the controller.
 
 ~tid:devices:The device software~
 
