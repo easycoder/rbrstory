@@ -26,16 +26,13 @@ class ESPComms():
         while E().any(): _,_ = E().irecv()
         self.checkPeer(peer)
         try:
-#            print(f'Send {espmsg[0:20]}... to {mac}')
             result=E().send(peer,espmsg)
-#            print(f'Result: {result}')
             if result:
                 counter=50
                 while counter>0:
                     if E().any():
                         mac,response = E().irecv()
                         if response:
-#                            print(f"Received response: {response.decode()}")
                             result=response.decode()
                             break
                     await asyncio.sleep(.1)
@@ -56,13 +53,11 @@ class ESPComms():
                 mac,msg=E().recv()
                 sender=hexlify(mac).decode()
                 msg=msg.decode()
-#                print(f'Message from {sender}: {msg[0:30]}...')
                 if msg[0]=='!':
                     # It's a message to be relayed
                     comma=msg.index(',')
                     slave=msg[1:comma]
                     msg=msg[comma+1:]
-#                    print(f'Slave: {slave}, msg: {msg}')
                     response=await self.send(slave,msg)
                 else:
                     # It's a message for me
@@ -80,13 +75,13 @@ class ESPComms():
         except: return 0
 ```
 
-This code handles ESP-Now networking, which operates on the lowest levels of the OSI model. It job is to deliver small packets of data to specified MAC addresses, so it does not deal with IP addresses, access point names or any other other higher layers.
+This code handles ESP-Now networking, which operates on the lowest levels of the OSI model. It job is to deliver small packets of data to specified MAC addresses, so it does not deal with IP addresses, access point names or any of the other higher layers.
 
 ESP-Now requires the device to be already set up in either Access Point or Station mode. Its communications go unnoticed by higher-level functions such as HTTP, so it can run concurrently with them.
 
 `checkPeer()` checks if the supplied MAC address is registered with ESP-Now on the device, without which it will not send messages.
 
-`send()` is an asynchronous function that sends a message to another ESP-Now device. The message is less that 240 bytes; in the RBR system they are always 100 bytes or less. Although the ESP-Now `send()` function confirms the message was sent it can't confirm that it was received, so the code here expects a response and wait up to 5 seconds for one. It then returns the response to its own caller, or reports an error.
+`send()` is an asynchronous function that sends a message to another ESP-Now device. The message must be less than 240 bytes; in the RBR system they are always 100 bytes or less. Although the ESP-Now `send()` function confirms the message was sent it can't confirm that it was received, so the code here expects a response and wait up to 5 seconds for one. It then returns the response to its own caller, or reports an error.
 
 `receive()` is set up as a concurrent function in ~tid:main:the `main.py` module~. It runs a loop waiting for messages to arrive and calling the ~tid:handler:`handler.py` module~, which processes the message and returns a response which it sends back to the caller to close the loop. A special case is where the message is flagged as being for another device, this being the mechanism by which the RBR system overcomes the limited range of wifi systems by asking some devices to act as repeaters.
 
