@@ -38,15 +38,19 @@ method=auto
 method=auto
 ```
 2 Crucial Details:
-`uuid`: This must be a unique identifier. You can generate one on the command line with the uuidgen command. You must install this command if you don't have it.
+`uuid`: This must be a unique identifier. You can generate one on the command line with the `uuidgen` command. You must install this command if you don't have it.
 ```
 $ uuidgen
 2a8c2df6-0f4d-4c89-8d40-57a0a7d5a1c1 # Copy this output
 ```
 Paste the generated UUID into the `uuid=` field. Using the same UUID for two connections will cause problems.
+
 `interface-name`: Set this to your wireless interface, found with ip a (e.g., wlan0, wlp3s0). You can omit this line to let NetworkManager use any compatible interface.
+
 `ssid`: This is the actual name of the Wi-Fi network (Access Point) you want to connect to. It must be exactly correct, including case and special characters.
-`key-mgmt`: wpa-psk is for typical personal networks (WPA2). For open/unsecured networks, use key-mgmt=none and remove the entire `[wifi-security]` section.
+
+`key-mgmt`: wpa-psk is for typical personal networks (WPA2). For open/unsecured networks, use `key-mgmt=none` and remove the entire `[wifi-security]` section.
+
 `psk`: The plain text password for the network.
     
 ### Step 3: Set Correct Permissions ###
@@ -75,7 +79,7 @@ ping -c 4 google.com
 ```
 
 ### Troubleshooting Tips ###
-1 Check Logs: If it doesn't work, logs are your best friend. Use journalctl to see what's happening:
+1 Check Logs: If it doesn't work, logs are your best friend. Use `journalctl` to see what's happening:
 ```
 journalctl -u NetworkManager -f
  ```
