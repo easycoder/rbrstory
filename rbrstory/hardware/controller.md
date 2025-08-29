@@ -8,13 +8,13 @@ The model currently used is a Chinese-made industrial computer called the IXHUB.
 
 Whatever computer is used, the software assumes it will be oriented in potrait mode, not landscape. The IXHUB comes without a case, so something suitable needs to be constructed. It may be that a design will become available for use by a 3D printer.
 
-## Software ##
+## Setting up the IXHUB ##
 
-The first thing to do is to flash the computer with Linux. The manufacturer of the IXHUB provides instructions on how to do this; the instructions and the relevant files are all in our repository. There are a number of other steps to take; here is a complete set of instructions.
+The first thing to do is to flash the device with Linux. The manufacturer of the IXHUB provides instructions on how to do this; the instructions and the relevant files are all in our repository. There are a number of other steps to take; here is a complete set of instructions.
 
-The IXHUB is an industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies instructions at [https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view](https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
+The IXHUB is an ARM-based industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies [https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view](instructions for flashing) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
 
-Once this job is done, the computer will boot up in Linux. However, the problem for an English or American user is that the system is all in Chinese. So here is what to do.
+Once this job is done, the computer will boot up in Linux. However, the first problem for an English or American user is that the system is all in Chinese. So here's what to do.
 
 First connect a keyboard and a mouse to the computer. Use one or both of the ports marked USB.
 Click the internet icon on the right of the task bar at the top of the screen. Select your router from the list and supply the password. Now go to the bottom of the screen and look for the console application, which has an icon showing a black window. Click to open it, then type

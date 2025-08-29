@@ -1,5 +1,7 @@
 # Changing the house router #
 
+This information is provided by Deepseek and has not been followed through on a live installation.
+
 Connecting to a new Wi-Fi access point solely by modifying config files is a classic system administration task and is very common on headless servers (like Raspberry Pis) or minimal installations.
 
 Using NetworkManager (Recommended for Desktops)

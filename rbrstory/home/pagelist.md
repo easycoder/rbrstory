@@ -29,6 +29,6 @@
 ~stid:software/webapp:The web application~  
 
 ## Subprojects ##
--~sid:EC-PY:EasyCoder for Python~  
+~sid:EC-PY:EasyCoder for Python~  
 ~sid:EC-JS:EasyCoder for JavaScript~  
 ~sid:Storyteller:Storyteller~

@@ -1,7 +1,7 @@
 # `ap.py` - the access point #
 
 The code is as follows:
-``` Python
+```python
 import network,binascii,asyncio,random
 
 class AP():
