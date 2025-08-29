@@ -1,6 +1,7 @@
 # `config.py` - the configuration code #
 
 The code is as follows:
+```
 import json,asyncio,time
 from files import readFile,writeFile,fileExists
 from pin import PIN
@@ -117,7 +118,7 @@ class Config():
 
     def kickWatchdog(self):
         self.active=True
-
+```
 The code starts by reading the configuration JSON script for the device. On the first run this will not exist, so it sets up a default file. It then sets up several of the other modules using the data from the config script.
 
 There then follows a large number of functions, most of which are implemented by calls to similarly named functions in one of the other code modules. Owing to space limitations, comments are rare, but the code is in most cases quite easy to read. Where possible there are descriptions of each function in the relevant parts of this documentation.
