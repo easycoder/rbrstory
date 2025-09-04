@@ -84,7 +84,7 @@ class Server():
         self.server=asyncio.create_task(asyncio.start_server(self.handleClient,'0.0.0.0',80))
 ```
 
-This is a very basic REST server that listens for messages on both AP and STA. Messages without a MAC address are always intended for the master device and are passed to ~tid:handler:`handler.py`~ for processing. If a MAC address is included it is examined to discover if the messages is for the master or a slave. If the former, processing is almost the same as before, but if a slave is the intended recipient the message is handed over to ~tid:espcomms:`espcomms.py`~ for transmission over ESP-Now.
+This is a very basic REST server that listens for messages on both AP and STA. Messages without a MAC address are always intended for the master device and are passed to ~tid:handler:handler.py~ for processing. If a MAC address is included it is examined to discover if the messages is for the master or a slave. If the former, processing is almost the same as before, but if a slave is the intended recipient the message is handed over to ~tid:espcomms:espcomms.py~ for transmission over ESP-Now.
 
 ~tid:devices:The device software~
 

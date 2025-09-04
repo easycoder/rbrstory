@@ -146,3 +146,7 @@ The messages handled are as follows:
 `save` is a request sent by the system configurator, to save the collected parts in the file whose name is given. This has to be done carefully, as a faulty file will usually cause the device to crash and become unusable, requiring its box to be opened and the CPU module extracted for reprogramming.
 
 `checkFile()` is a function that reads back the saved file and compares it with the contents of the download list. If it doesn't match, the configurator will retry the entire download up to 10 times before abandoning it, at which point the device will have to be opened up and the CPU module extracted and possibly replaced.
+
+~tid:devices:The device software~
+
+~stid:home/pagelist:List of Pages~
