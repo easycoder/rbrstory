@@ -125,7 +125,7 @@ class Handler():
 #        print('Handler:',response)
         return response
 ```
-This module handles messages arriving either via STA on the master device or ESP-Now on a slave. Messages are processed before arriving here, to remove HTTP information or ESP-Now headers, so this module only has to deal with the message content.
+This module handles messages arriving either via AP or from STA on the master device and ESP-Now on a slave. Messages are processed before arriving here, to remove HTTP information or ESP-Now headers, so this module only has to deal with the message content.
 
 The response to most messages is 'OK' plus reply information plus the most recent information broadcast by a Mijia thermometer and detected by this device.
 
