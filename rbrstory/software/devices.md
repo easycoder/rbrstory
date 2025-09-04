@@ -8,8 +8,6 @@ The system comprises a standard bunch of Python scripts that are loaded into eac
 
 The Python scripts are as follows:
 
-~tid:ap:ap.py~ contains all the code for handling a network access point (hotspot).
-
 ~tid:blescan:blescan.py~ is a Bluetooth LE (BLE) scanner set up to detect nearby Mijia thermometers.
 
 ~tid:boot:boot.py~ is the file that will always be executed first thing on boot, after MP has started.
@@ -18,7 +16,7 @@ The Python scripts are as follows:
 
 ~tid:dht22:dht22.py~ handles devices that have a DHT22 thermometer.
 
-~tid:espcomms:espcomms.py~ handles networking, using ESP-Now to implement a chained system that extends the range of a wifi router.
+~tid:espcomms:espcomms.py~ handles networking, including the use of ESP-Now to implement a chained system that extends the range of a wifi router.
 
 ~tid:files:files.py~ contains a set of useful file functions that supplement those supplied by the MP libraries.
 
@@ -30,6 +28,6 @@ The Python scripts are as follows:
 
 ~tid:server:server.py~ runs a small webserver to accept requests received by the access point.
 
-~tid:sta:sta.py~ contains all the code for handling station mode (an HTTP client).
+One other file is important; `files.txt` is a list of all the files that are to be downloaded. This and all of the Python scripts are kept in the GitHub repository and downloaded directly from there by the system configurator.
 
 ~stid:home/pagelist:List of Pages~
