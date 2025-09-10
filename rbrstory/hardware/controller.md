@@ -6,7 +6,7 @@ The system controller is a small Linux computer. For the time being I'll describ
 
 The model currently used is a Chinese-made industrial computer called the IXHUB. The CPU is from the ARM family and it normally arrives programmed with an ancient version of Android.
 
-Whatever computer is used, the software assumes it will be oriented in potrait mode, not landscape. The IXHUB comes without a case, so something suitable needs to be constructed. It may be that a design will become available for use by a 3D printer.
+Whatever computer is used, the software assumes it will be oriented in potrait mode, not landscape. The IXHUB comes without a case, so something suitable needs to be constructed. It may be that a design will become available for use by a 3D printer. Here's a photo of one mounted on the side of a kitchen cabinet using a simple wooden frame.~img:IXHUB.jpg:left 25%~
 
 ## Setting up the IXHUB ##
 
