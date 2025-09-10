@@ -12,7 +12,7 @@ Whatever computer is used, the software assumes it will be oriented in potrait m
 
 ~img:IXHUB.jpg:left 25%~The first thing to do is to flash the device with Linux. The manufacturer of the IXHUB provides instructions on how to do this; the instructions and the relevant files are all in our repository. There are a number of other steps to take; here is a complete set of instructions.
 
-The IXHUB is an ARM-based industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies [https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view](instructions for flashing) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
+The IXHUB is an ARM-based industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies [instructions for flashing](https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
 
 Once this job is done, the computer will boot up in Linux. However, the first problem for an English or American user is that the system is all in Chinese. So here's what to do.
 
