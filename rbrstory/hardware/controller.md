@@ -6,11 +6,11 @@ The system controller is a small Linux computer. For the time being I'll describ
 
 The model currently used is a Chinese-made industrial computer called the IXHUB. The CPU is from the ARM family and it normally arrives programmed with an ancient version of Android.
 
-Whatever computer is used, the software assumes it will be oriented in potrait mode, not landscape. The IXHUB comes without a case, so something suitable needs to be constructed. It may be that a design will become available for use by a 3D printer. Here's a photo of one mounted on the side of a kitchen cabinet using a simple wooden frame.~img:IXHUB.jpg:left 25%~
+Whatever computer is used, the software assumes it will be oriented in potrait mode, not landscape. The IXHUB comes without a case, so something suitable needs to be constructed. It may be that a design will become available for use by a 3D printer. Here's a photo of one mounted on the side of a kitchen cabinet using a simple wooden frame.
 
 ## Setting up the IXHUB ##
 
-The first thing to do is to flash the device with Linux. The manufacturer of the IXHUB provides instructions on how to do this; the instructions and the relevant files are all in our repository. There are a number of other steps to take; here is a complete set of instructions.
+~img:IXHUB.jpg:left 25%~The first thing to do is to flash the device with Linux. The manufacturer of the IXHUB provides instructions on how to do this; the instructions and the relevant files are all in our repository. There are a number of other steps to take; here is a complete set of instructions.
 
 The IXHUB is an ARM-based industrial computer with a touchscreen, that comes with a rather elderly version of Android installed. For many users the first job is to convert this to Linux, which is well suited to this machine. The manufacturer supplies [https://docs.google.com/document/d/16iSiGHH2VvuXWdOkp5VizXUO-V9MsP6H/view](instructions for flashing) and requires a Windows computer. Study the instructions carefully and follow them exactly; they may seem incomplete but in fact everything you need is there.
 
