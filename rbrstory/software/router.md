@@ -4,7 +4,7 @@ This information is provided by Deepseek and has not been followed through on a 
 
 Connecting to a new Wi-Fi access point solely by modifying config files is a classic system administration task and is very common on headless servers (like Raspberry Pis) or minimal installations.
 
-Using NetworkManager (Recommended for Desktops)
+## Using NetworkManager (Recommended for Desktops) ##
 This is the standard method for most distributions like Ubuntu, Fedora, and Debian with a desktop environment.
 
 ### Step 1: Create the Configuration File ###
@@ -47,7 +47,7 @@ $ uuidgen
 ```
 Paste the generated UUID into the `uuid=` field. Using the same UUID for two connections will cause problems.
 
-`interface-name`: Set this to your wireless interface, found with ip a (e.g., wlan0, wlp3s0). You can omit this line to let NetworkManager use any compatible interface.
+`interface-name`: Set this to your wireless interface, found with `ip a` (e.g., wlan0, wlp3s0). You can omit this line to let NetworkManager use any compatible interface.
 
 `ssid`: This is the actual name of the Wi-Fi network (Access Point) you want to connect to. It must be exactly correct, including case and special characters.
 
