@@ -25,6 +25,7 @@
 &emsp;~stid:software/server:server.py A small webserver~  
 ~stid:software/webserver:The web server~  
 ~stid:software/webapp:The web application~  
+~stid:software/configurator:The configuration application~
 
 ## Subprojects ##
 ~sid:EC-PY:EasyCoder for Python~  

@@ -145,7 +145,7 @@ The messages handled are as follows:
 `part` is a message sent by the system configurator, that contains part of a file to be downloaded. The message has 2 components; the part number and the text of the file. Part numbers must arrive in strict ascending sequence or an error is thrown. Each part is added to a list of parts, then a return value is sent comprising the part number and the length of the part. At some point in the future a checksum or even CRC could be added, but so far there is no evidence that data is being corrupted to the point it can't be detected by this simple method.  
 `save` is a request sent by the system configurator, to save the collected parts in the file whose name is given. This has to be done carefully, as a faulty file will usually cause the device to crash and become unusable, requiring its box to be opened and the CPU module extracted for reprogramming.
 
-`checkFile()` is a function that reads back the saved file and compares it with the contents of the download list. If it doesn't match, the configurator will retry the entire download up to 10 times before abandoning it, at which point the device will have to be opened up and the CPU module extracted and possibly replaced.
+`checkFile()` is a function that reads back the saved file and compares it with the contents of the download list. If it doesn't match, the configurator will retry the entire download up to 10 times before abandoning it.
 
 ~tid:devices:The device software~
 

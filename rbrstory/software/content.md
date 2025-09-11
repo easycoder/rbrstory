@@ -14,4 +14,6 @@ A computer project of any size gets complex rather quickly. One way of dealing w
 
 ~tid:webapp:The web application~
 
+~tid:configurator:The configuration application~
+
 ~stid:home/pagelist:List of Pages~
