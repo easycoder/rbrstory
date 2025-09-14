@@ -12,33 +12,13 @@ class Handler():
         self.config=config
         config.setHandler(self)
         self.relay=config.getRelay()
-
-    def checkFile(self, buf, file):
-        try:
-            with open(file, 'r') as f:
-                i = 0  # index in lst
-                pos = 0  # position in current list item
-                while True:
-                    c = f.read(1)
-                    if not c:
-                        # End of file: check if we've also finished the list
-                        while i < len(buf) and pos == len(buf[i]):
-                            i += 1
-                            pos = 0
-                        return i == len(buf)
-                    if i >= len(buf) or pos >= len(buf[i]) or c != buf[i][pos]:
-                        return False
-                    pos += 1
-                    if pos == len(buf[i]):
-                        i += 1
-                        pos = 0
-        except OSError:
-            return False
+        self.saveError=False
 
     def handleMessage(self,msg):
-#        print('Message:',msg)
-        response=f'OK {self.config.getUptime()} :{self.config.getBLEScan().getValues()}'
-        if msg == 'uptime':
+#        print('Handler:',msg)
+        bleValues=self.config.getBLEValues()
+        response=f'OK {self.config.getUptime()} :{bleValues}'
+        if msg=='uptime':
             pass
         elif msg == 'on':
             response=f'{response} ON' if self.relay.on() else 'No relay'
@@ -60,6 +40,11 @@ class Handler():
             channel=msg[8:]
             self.config.setChannel(channel)
             response=f'OK {channel}'
+        elif msg[0:7]=='environ':
+            environ=msg[8:]
+            print('Set environ to',environ)
+            self.config.setEnviron(environ)
+            response=f'OK {environ}'
         elif msg=='temp':
             response=f'OK {self.config.getTemperature()}'
         elif msg=='pause':
@@ -92,14 +77,13 @@ class Handler():
                     self.saveError=False
                 else:
                     if self.saveError:
-                        return 'Error'
+                        return 'Save error'
                     else:
                         if part==self.pp+1:
-                            self.pp+=1
+                            self.pp=part
                         else:
                             self.saveError=True
-                            print('Sequence error')
-                            return 'Sequence error'
+                            return f'Sequence error: {part} {self.pp+1}'
                 self.buffer.append(text)
                 response=f'{part} {str(len(text))}'
         elif msg[0:4]=='save':
@@ -122,8 +106,30 @@ class Handler():
             print(f'mkdir {path}')
             response='OK' if createDirectory(path) else 'Fail'
         else: response=f'Unknown message: {msg}'
-#        print('Handler:',response)
+#        print('Handler response:',response)
         return response
+
+    def checkFile(self, buf, file):
+        try:
+            with open(file, 'r') as f:
+                i = 0  # index in lst
+                pos = 0  # position in current list item
+                while True:
+                    c = f.read(1)
+                    if not c:
+                        # End of file: check if we've also finished the list
+                        while i < len(buf) and pos == len(buf[i]):
+                            i += 1
+                            pos = 0
+                        return i == len(buf)
+                    if i >= len(buf) or pos >= len(buf[i]) or c != buf[i][pos]:
+                        return False
+                    pos += 1
+                    if pos == len(buf[i]):
+                        i += 1
+                        pos = 0
+        except OSError:
+            return False
 ```
 This module handles messages arriving either via AP or from STA on the master device and ESP-Now on a slave. Messages are processed before arriving here, to remove HTTP information or ESP-Now headers, so this module only has to deal with the message content.
 

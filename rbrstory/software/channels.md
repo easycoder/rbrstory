@@ -7,18 +7,49 @@ from espnow import ESPNow
 
 class Channels():
     def __init__(self,espComms):
+        print('Starting Channels')
         self.espComms=espComms
+        self.config=espComms.config
         self.channels=[1,6,11]
-        if self.espComms.config.isMaster():
-            self.ssid=espComms.config.getSSID()
-            self.password=espComms.config.getPassword()
+        self.myMaster=self.config.getMyMaster()
+        if self.config.isMaster():
+            self.ssid=self.config.getSSID()
+            self.password=self.config.getPassword()
             asyncio.create_task(self.checkRouterChannel())
         self.resetCounters()
+    
+    def init(self):
+        asyncio.create_task(self.findMyMaster())
         asyncio.create_task(self.countMissingMessages())
 
     def resetCounters(self):
         self.messageCount=0
         self.idleCount=0
+
+    async def findMyMaster(self):
+        if self.myMaster:
+            if await self.ping(): return
+        else:
+            print('Waiting for master')
+            for count in range(100):
+                self.myMaster=self.config.getMyMaster()
+                if self.myMaster:
+                    print('Found master',self.myMaster,'on channel',self.espComms.channel)
+                    return
+                await asyncio.sleep(.1)
+        self.hopToNextChannel()
+        asyncio.get_event_loop().stop()
+        machine.reset()
+    
+    async def ping(self):
+        peer=bytes.fromhex(self.myMaster)
+        self.espComms.espSend(peer,'ping')
+        _,msg=self.espComms.e.recv(1000)
+        print('Ping response from',self.myMaster,':',msg)
+        if msg!=None:# and msg.decode()=='pong':
+            print('Found master on channel',self.espComms.channel)
+            return True
+        return False
 
     async def countMissingMessages(self):
         print('Count missing messages')
@@ -27,6 +58,7 @@ class Channels():
         e=espComms.e
         while True:
             await asyncio.sleep(1)
+            if not self.myMaster: continue
 
             self.messageCount+=1
             self.idleCount+=1
@@ -34,38 +66,12 @@ class Channels():
             limit=30
             if self.messageCount>limit and not espComms.config.isMaster():
                 print('No messages for 30 seconds')
-#                async with espComms.espnowLock:
-#                    for index,value in enumerate(self.channels):
-#                        if value==espComms.channel:
-#                            espComms.channel=self.channels[(index+1)%len(self.channels)]
-#                            break
-#                    self.restartESPNow()
-#                    print('Switched to channel',espComms.channel)
-#                    self.messageCount=0
-                index=-1
-                # Find the current index
-                for n,value in enumerate(self.channels):
-                    if value==espComms.channel:
-                        espComms.channel=self.channels[(n+1)%len(self.channels)]
-                        index=n
-                        break
-                if index==-1:
-                    print('Bad channel number')
-                    asyncio.get_event_loop().stop()
-                    machine.reset()
-                # Go round the loop up to 10 times
-                for counter in range[0:30]:
-                    await self.restartESPNow()
-                    e.send(espComms.sender,'ping')
-                    _,msg=self.e.recv(1000)
-                    if msg!=None and msg.decode()=='pong':
-                        print('Found master on channel',espcomms.channel)
-                        self.resetCounters()
-                        break
-                    else: # Change channels
-                        index=(index+1)%len(self.channels)
-                        espComms.channel=self.channels[index]
-                # Give up
+                # Retry the current channel
+                if await self.ping():
+                    self.resetCounters()
+                    continue
+                self.hopToNextChannel()
+                channel=self.hopToNextChannel()
                 asyncio.get_event_loop().stop()
                 machine.reset()
 
@@ -73,24 +79,17 @@ class Channels():
                 print('No messages after 3 minutes')
                 asyncio.get_event_loop().stop()
                 machine.reset()
+                
+    def hopToNextChannel(self):
+        index=-1
+        for n,value in enumerate(self.channels):
+            if value==self.espComms.channel:
+                self.espComms.channel=self.channels[(n+1)%len(self.channels)]
+                index=n
+                break
+        if index==-1: self.espComms.channel=self.channels[0]
+        self.config.setChannel(self.espComms.channel)
     
-    async def restartESPNow(self):
-        espComms=self.espComms
-        ap=espComms.ap
-        e=espComms.e
-        e.active(False)
-        await asyncio.sleep(.2)            
-        ap.active(False)
-        await asyncio.sleep(.1)
-        ap.active(True)
-        ap.config(channel=espComms.channel)
-        espComms.config.setChannel(espComms.channel)   
-        e=ESPNow()
-        e.active(True)
-        self.peers=[]
-        self.messageCount=0
-        print('Switched to channel',espComms.channel)
-
     async def checkRouterChannel(self):
         while True:
             await asyncio.sleep(60)

@@ -10,6 +10,7 @@ from dht22 import DHT22
 from handler import Handler
 from blescan import BLEScan
 from espcomms import ESPComms
+from channels import Channels
 
 class Config():
 
@@ -20,6 +21,7 @@ class Config():
             self.config={}
             self.config['name']='(none)'
             self.config['master']=False
+            self.config['myMaster']=''
             self.config['path']=''
             self.config['channel']=1
             self.config['pins']={}
@@ -36,6 +38,9 @@ class Config():
             self.config['pins']['dht22']=pin
             writeFile('config.json',json.dumps(self.config))
         self.channel=int(self.config['channel'])
+        self.master=self.config['master']
+        if self.master: self.myMaster=''
+        else: self.myMaster=self.config['myMaster']
         pin,invert=self.getPinInfo('led')
         self.led=PIN(self,pin,invert)
         pin,invert=self.getPinInfo('relay')
@@ -51,15 +56,10 @@ class Config():
         self.resetRequested=False
         self.server=Server(self)
         self.handler=Handler(self)
-        self.bleScan=BLEScan()
         print('Config: set up comms')
         self.espComms=ESPComms(self)
         asyncio.create_task(self.runWatchdog())
 
-    async def respond(self,response,writer):
-        await self.server.respond(response,writer)
-    async def sendDefaultResponse(self,writer):
-        await self.server.sendDefaultResponse(writer)
     async def handleClient(self,reader,writer):
         await self.server.handleClient(reader,writer)
 
@@ -76,36 +76,57 @@ class Config():
         if self.dht22!=None: self.dht22.resume()
     
     def doFinalInitTasks(self):
-        if not self.isMaster():
-            asyncio.create_task(self.espComms.receive())
-            asyncio.create_task(self.espComms.checkChannels())
+        self.server.startup()
+        asyncio.create_task(self.espComms.receive())
+        self.bleScan=BLEScan()
         asyncio.create_task(self.bleScan.scan())
+        if self.myMaster:
+            self.channels=Channels(self.espComms)
+            self.channels.init()
 
     def setAP(self,ap): self.ap=ap
     def setSTA(self,sta): self.sta=sta
     def setESPComms(self,espComms): self.espComms=espComms 
     def setMAC(self,mac): self.mac=mac
     def setIPAddr(self,ipaddr): self.ipaddr=ipaddr
+    def setEnviron(self,environ):
+        print('environ:',environ)
+        items=environ.split('-')
+        self.channel=int(items[0])
+        self.config['channel']=self.channel
+        self.myMaster=items[1]
+        self.config['myMaster']=self.myMaster
+        writeFile('config.json',json.dumps(self.config))
+        print('envron:',json.dumps(self.config))
     def setChannel(self,channel):
+        print('Set channel',channel)
         self.channel=channel
         self.config['channel']=channel
         writeFile('config.json',json.dumps(self.config))
+    def getChannel(self):
+        return self.espComms.channel if self.isMaster() else self.channel
+    def setMyMaster(self,myMaster):
+        print('Setting myMaster to',myMaster)
+        self.myMaster=myMaster
+        self.config['myMaster']=myMaster
+        writeFile('config.json',json.dumps(self.config))
+    def getMyMaster(self): return self.myMaster
     def setHandler(self,handler): self.handler=handler
     def addUptime(self,t): self.uptime+=t
     
-    def isMaster(self): return self.config['master']
+    def isMaster(self): return self.master
+    def apIsOpen(self): return self.espComms.apIsOpen()
     def getDevice(self): return self.config['device']
     def getName(self): return self.config['name']
     def getSSID(self): return self.config['hostssid']
     def getPassword(self): return self.config['hostpass']
     def getMAC(self): return self.mac
-    def stopAP(self): self.espComms.stopAP()
-    def startServer(self): self.server.startup()
+    def closeAP(self): self.espComms.closeAP()
     def getIPAddr(self): return self.ipaddr
-    def getChannel(self): return self.channel
     def getHandler(self): return self.handler
     def getESPComms(self): return self.espComms
-    def getBLEScan(self): return self.bleScan
+    def getBLEValues(self):
+        return self.bleScan.getValues() if hasattr(self,'bleScan') else ''
     def getRBRNow(self): return self.rbrNow
     def getPinInfo(self,name):
         pin=self.config['pins'][name]

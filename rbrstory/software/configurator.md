@@ -18,7 +18,8 @@ In the bottom right-hand corner of the window is a status line that provides inf
 
 A newly-discovered system has no devices; the ones you see in the picture are for an existing system. On the left, _Scan for devices_ lets you add devices to the system, one by one. This is a complex procedure but the configurator takes care of it all.
 
-When an RBR-Now device is installed into a product, the first thing is to flash it with Micropython, taking care to pick the version for the particular variant of ESP32. Currently they are all ESP32-C3. See the Micropython website for instructions on how to do this on the command line, or you may find Thonny is able to do it. We provide an EasyCoder script, `flash-device.ecs`, that will do the job for you if the files are all in the right places. If you have downloaded the RBR repository this should be the case. The tool requires adafruit-ampy to be installed:
+When an RBR-Now device is installed into a product, the first thing is to flash it with Micropython, taking care to pick the version for the particular variant of ESP32. Currently they are all ESP32-C3. See the Micropython website for instructions on how to do this on the command line, or you may find Thonny is able to do it. We provide an EasyCoder script, `flash-device.ecs`, that will do the job for you if the files are all in the right places. If you have downloaded the RBR repository this should be the case. The tool requires `adafruit-ampy`r00m8Yr00m
+to be installed:
 ```
 pip install adafruit-ampy
 ```
