@@ -172,24 +172,24 @@ The code here was developed with a lot of trial-and-error and the assistance of 
 ### `__init__()` ###
 This code makes use of a second module, "config", which handles system parameters such as route SSID/password and identifies which I/O pins are used by the device. This data is typically held in a JSON file that can be read and written as necessary. Wherever you see `config.xxxxx()` it's a function in the config module that's being called.
 
-ESP-Now is extremely fusy about configuration. There may be differences between different variants of ESP32; this code is known to work on ESP32-C3, which is a fairly basicmodel, so it ought to be fine on most other variants. There is a strict sequence to follow, which differs between master and slave.
+ESP-Now is extremely fusy about configuration. There may be differences between different variants of ESP32; this code is known to work on ESP32-C3, which is a fairly basic model, so it ought to be fine on most other variants. There is a strict sequence to follow, which differs between master and slave.
 
 The master first requires STA to be active. Here it is connected to the house router, which governs the wifi channel the system will use. Then the AP is set up, and finally ESP-Now is activated. This ordering guarantees that ESP-Now will use the STA channel.
 
-The slave does things the other way round, first setting up AP and following that with a stub STA. This ensures that the AP channel wil be used. If you don't get this order right, some things will probably not work and strange errors will arise.
+The slave does things the other way round, first setting up AP and following that with a stub STA. This ensures that the AP channel will be used. If you don't get this order right, some things will probably not work and strange errors will arise.
 
 ### `closeAP()` ###
-During the first 2 minutes following boot, the AP can be connected from a browser and will accept requests and commands. This includes rewriting the JSON config file and rebooting the device. After this period the SSID of the AP is changed to `-` and a ranfdom password is applied, making it almost impossible to connect. This is a security feature that prevents anyone interfering unless they can physically repower the device.
+During the first 2 minutes following boot, the AP can be connected from a browser and will accept requests and commands. This includes rewriting the JSON config file and rebooting the device. After this period the SSID of the AP is changed to `-` and a random password is applied, making it almost impossible to connect. This is a security feature that prevents anyone interfering unless they can physically repower the device.
 
 ### `addPeer()` ###
 It's very easy to get ESP-Now peer management wrong. The documentation gives few hints as to how fussy the protocol is about handling peers. For example, it fails to mention that a channel change not only invalidates the peers table but makes it impossible to recreate. Only a reset will do that.
 
 Although ESP-Now will happily receive messages from anywhere, sending can only be done to a peer whose MAC address has been registered with `e.add_peer()`. This must be done just once for any given peer or an error will be thrown. So this function manages its own peers table to track what has already been added. Note that the device may have 2 MAC addresses; one for each of its 2 interfaces. When you initiate a send it will usually be to one of these, but when replying to a message it will be the other. Both must be added to the peers table.
 
-### `send()` and ``receive()` ###
-The `receive()` function runs synchronously in a loop, waiting for messages and replying to them. It might be considered sensible to use a lock so that send and receive can be exclusive, but this gives rise to some horrible issues that are hard to track down. The strategy here is one that avoids such issues
+### `send()` and `receive()` ###
+The `receive()` function runs synchronously in a loop, waiting for messages and replying to them. It might be considered sensible to use a lock so that send and receive can be exclusive, but this gives rise to some horrible issues that are hard to track down. The strategy here is one that avoids such issues.
 
-In the receive loop, when a message arrives it is decoded by the `handleMessage()` function in a companion `Handler` class, which returns a reply to send back to the caller. While this is happening, a `sending` flag is set `False`. Any request to send will block, using `requestToSend`, until it goes `True`, which is done at the bottom of the receive loop. The message can now be sent and the code waits for a reply.
+In the receive loop, when a message arrives it is decoded by the `handleMessage()` function in a companion `Handler` class, which returns a reply to send back to the caller. While this is happening, a `sending` flag is set `False`. Any request to send will block, using `requestToSend`, until `sending` goes `True`, which is done at the bottom of the receive loop. The message can now be sent and the code waits for a reply.
 
 However, this might not come from the device we just sent to. This system is designed to handle router channel changes, and when this happens the master quickly changes to the new channel, but all the slaves know is that messages have stopped arriving (because they're all on the wrong channel). So after a while they issue a 'ping' message to the master. If it replies they're on the right channel, otherwise they change channels and try the ping again.
 
@@ -200,8 +200,10 @@ Note that this code cannot deal with anything but 'ping' messages from its slave
 The code in `receive()` has one more feature. If the received message starts with `!` it's not for this device, but instead is a request to forward a message to another device. The MAC address of the intended recipient follows the `!` and is terminated by a comma. The code strips these away and is left with a MAC address and a (shorter) message, which it forwards, returning whatever returns back up to its own caller.
 
 ## Channel changes ##
-The code to follow a router channel change is in the ~tid:channels:channels.py~ module.
+The code to follow a router channel change is in the Channels class.
 
+~tid:handler:The message handler~  
+~tid:channels:Dealing with channel changes~  
 ~tid:devices:The device software~
 
 ~stid:home/pagelist:List of Pages~
