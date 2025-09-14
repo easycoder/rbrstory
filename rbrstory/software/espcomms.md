@@ -165,24 +165,6 @@ This code handles ESP-Now networking, which operates on the lowest levels of the
 
 ESP-Now requires the device to be already set up in either Access Point or Station mode. Its communications go unnoticed by higher-level functions such as HTTP, so it can run concurrently with them.
 
-`__init__` is the class constructor. It sets up an HTTP client (STA), an access point (AP) and the ESP-Now networking. Different flavours of ESP32 behave differently, so this code attempts to cater for all by only requiring features held by the simpler versions such as the ESP32-C3. Full information is hard to find, but the C3 appears to require both STA and AP to be active for ESP-Now to work fully. Omitting STA appears to prevent transmission but the device will still receive. The constructor also sets up an async lock to prevent concurrent operations from interfering with each other.
-
-`closeAP()` makes the access point inaccessible. We can't actually stop it, as this would disable ESP-Now, so instead we just change the SSID to a single dash and reset the password to a random value. The effectively makes it impossible to log into the device and cause any damage, intentionally or otherwise. The function is called 2 minutes after startup; until this point the AP is open and available for system management purposes.
-
-`addPeer()` checks if the supplied MAC address is registered with ESP-Now on the device, without which it will not send messages. If the address is not already registered it is added.
-
-`send()` is an asynchronous function that sends a message to another ESP-Now device. The message must be less than 240 bytes; in the RBR system they are always 100 bytes or less. Although the ESP-Now `send()` function confirms the message was sent it can't confirm that it was received, so the code here expects a response and wait up to 5 seconds for one. It then returns the response to its own caller, or reports an error.
-
-`receive()` is set up as a concurrent function in ~tid:config:config.py~. It runs a loop waiting for messages to arrive. For each one it calls the ~tid:handler:handler.py module~, which processes the message and returns a response which it sends back to the caller to close the loop. A special case is where the message is flagged as being for another device, this being the mechanism by which the RBR system overcomes the limited range of wifi systems by asking some devices to act as repeaters. In theory this can be used to create a network of any physical size, but the code here is limited to a single repeat.
-
-`getRSS()` is a simple function that returns the signal strength of messages received by the device. It can be used to judge whether this device should be set up using another as a repeater.
-
-`checkChannels()` is another concurrent function; to detect when the house router has changed channels. This happens usually late at night; the router scans the network and picks which channel is least crowded. In the 2.4GHz band there are only 3 non-overlapping channels; 1, 6 and 11. In normal use, the device will receive messages from the system controller every 10 seconds or so. If these stop, then after a set time the device will 'hop' to the next channel and resume waiting. The initial wait time is an hour, but once the device is "channel hopping" it does so every 30 seconds. If it receives a message it reverts to the one hour, since it must now be on the right channel. This feature allows the configurator program to stop the system controller so that devices can be reconfigured, and gives the user an hour to complete the tasks before resuming channel hopping. It's unlikely that the router will change channels during this time, so channel hopping will normally only resume if the user forgets to exit the configurator.
-
-A second timer detects when no messages have been received on any of the 3 channels for 3 minutes, and resets the device.
-
-## Discussion ##
-
 The code in this module is for a specific network scenario, where there is a single master and a number of slaves. The master (or hub) device connects to the house router with its station (STA) interface and the slaves do not (but they still require STA to be active for ESP-Now to work). Both master and slaves use the same code but use it in different ways. In both case an access point (AP) is set up for the first 2 minutes following a reboot, so that an administrator can talk directly to the device. This permits configuration changes to be made over-the-air from a local browser.
 
 The code here was developed with a lot of trial-and-error and the assistance of AI to find relevant examples. There turned out to be none that directly considered the complexities of the scenario; most are far simpler. If anyone else has solved the same problem they hadn't told the world about it at the time my own development was under way.
