@@ -1,4 +1,4 @@
-# `channels.md` channel management
+# `channels.py` - channel management
 
 The code is as follows:
 ```python
@@ -18,11 +18,12 @@ class Channels():
             asyncio.create_task(self.checkRouterChannel())
         self.resetCounters()
     
-    def init(self):
+    def setupSlaveTasks(self):
         asyncio.create_task(self.findMyMaster())
         asyncio.create_task(self.countMissingMessages())
 
     def resetCounters(self):
+        print('Resetting counters')
         self.messageCount=0
         self.idleCount=0
 
@@ -91,8 +92,9 @@ class Channels():
         self.config.setChannel(self.espComms.channel)
     
     async def checkRouterChannel(self):
+        print('Check the router channel')
         while True:
-            await asyncio.sleep(60)
+            await asyncio.sleep(300)
             sta=self.espComms.sta
             sta.disconnect()
             time.sleep(1)
@@ -101,7 +103,7 @@ class Channels():
             while not sta.isconnected():
                 time.sleep(1)
                 print('.',end='')
-            self.restartESPNow()
+            self.espComms.restartESPNow()
             channel=sta.config('channel')
             if channel!=self.espComms.channel:
                 print(' router changed channel from',self.espComms.channel,'to',channel)

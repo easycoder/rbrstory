@@ -9,7 +9,7 @@ The RBR-Now family of devices uses the ESP-Now networking protocol to run indepe
 Although the system can be set up manually for each device, doing so provides little to no confirmation that everything is as it should be. To make things simpler we provide the "configurator; an EasyCoder script that runs on a separate computer on the network. The computer must be Linux as it requires features that are not available on Windows. It is possible that a Linux subsystem could be used as there are not many such features; the main one is to scan the local network to find wifi access points. We have no knowledge of using a Mac but something similar might apply.
 
 Here's what the configurator looks like after starting up:
-~img:RBRConf.png:center 50%~
+~img:RBRConf.png:center 100%~
 On the left is a column of buttons and on the right the information about the system and its devices. The configurator can manage more than one system; some may be on the same router network and others not. The drop-down Systems list lets you choose which one to manage. If you are not currently connected to the network for that system you will not be able to view or alter anything.
 
 Next to this list is a button to perform a scan of the local network, looking for system controllers. If it finds one that already exists in the list, no action is taken. You can also delete a system from the list. Most dangerous commands of this kind will ask for confirmation before going ahead.
@@ -18,14 +18,13 @@ In the bottom right-hand corner of the window is a status line that provides inf
 
 A newly-discovered system has no devices; the ones you see in the picture are for an existing system. On the left, _Scan for devices_ lets you add devices to the system, one by one. This is a complex procedure but the configurator takes care of it all.
 
-When an RBR-Now device is installed into a product, the first thing is to flash it with Micropython, taking care to pick the version for the particular variant of ESP32. Currently they are all ESP32-C3. See the Micropython website for instructions on how to do this on the command line, or you may find Thonny is able to do it. We provide an EasyCoder script, `flash-device.ecs`, that will do the job for you if the files are all in the right places. If you have downloaded the RBR repository this should be the case. The tool requires `adafruit-ampy`r00m8Yr00m
-to be installed:
+When an RBR-Now device is installed into a product, the first thing is to flash it with Micropython, taking care to pick the version for the particular variant of ESP32. Currently they are all ESP32-C3. See the Micropython website for instructions on how to do this on the command line, or you may find Thonny is able to do it. We provide an EasyCoder script, `flash-device.ecs`, that will do the job for you if the files are all in the right places. If you have downloaded the RBR repository this should be the case. The tool requires `adafruit-ampy` to be installed:
 ```
 pip install adafruit-ampy
 ```
-This downloads and installs Micropython and all the RBR Python scripts.
+Then run `ec flash-device.ecs', which downloads and installs Micropython and all the RBR Python scripts.
 
-Once this is done you can power up the device. If you run it on Thonny you will see messages output as configuration proceeds, but in most cases you can just keep an eye on the status line in the configurator. When the device starts it will wait indefinitely to be configured. While doing so it publishes an access point on `http://192.168.9.1`, with an SSID `RBR-Now-xxxxxxxxxxxx`, where `xxxxxxxxxxxx` is the MAC address of the device. The password is `00000000` and you can log into it from a browser if you wish. There's not much to see, though.
+Once this is done you can power up the device. If you run it on Thonny you will see messages output as configuration proceeds, but in most cases you can just keep an eye on the status line in the configurator. When the device starts it will wait indefinitely to be configured. While doing so it publishes an access point on `http://192.168.9.1`, with an SSID `RBR-Now-xxxxxxxxxxxx`, where `xxxxxxxxxxxx` is the MAC address of the device. The password is `00000000` and you can log into it from a browser if you wish, but there's not much to see.
 
 When you click _Scan for devices_ the configurator polls the local network, looking for anything starting with `RBR-Now` that it doesn't already know about. Your new device will appear after a while. Note that this action depends on internal Linux features, and owing to cacheing devices can fail to appear immediately or go on being visible after they have been disconnected. If nothing happens, click again and if it stubbornly refuses to appear after many clicks, close the configurator and restart it. Eventually a small window will pop up showing a list of all the devices found. There should only be one unless you powered up two devices, so to avoid confusion don't do that.
 

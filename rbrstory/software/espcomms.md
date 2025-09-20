@@ -71,6 +71,11 @@ class ESPComms():
         self.peers.append(h)
         print('Added',h,'to peers on channel',self.channel)
         return True
+
+    def espSend(self,peer,msg):
+        if self.addPeer(peer):
+            try: self.e.send(peer,msg)
+            except Exception as ex: print('espSend:',ex)
     
     def send(self,mac,msg):
 #        print(f'Send {msg[0:20]}... to {mac} on channel {self.channel}')
@@ -99,7 +104,7 @@ class ESPComms():
                     if counter==0: result='Fail (no reply)'
                     else:
                         print(f'{msg[0:20]} to {mac}: {result}')
-                        self.resetCounters()
+                        self.config.resetCounters()
                 else: result='Fail (no result)'
             except Exception as ex:
                 result=f'Fail ({ex})'
@@ -108,19 +113,15 @@ class ESPComms():
         self.sending=False
         return result
 
-    def espSend(self,peer,msg):
-        if self.addPeer(peer):
-            self.e.send(peer,'ping')
-
     async def receive(self):
         print('Starting ESPNow receiver')
         while True:
-            self.resetCounters()
             while True:
                 if self.e.active():
                     while self.e.any():
                         mac,msg=self.e.recv()
                         msg=msg.decode()
+                        print('Received',msg)
                         if msg=='ping':
                             try:
                                 self.addPeer(mac)
@@ -143,13 +144,14 @@ class ESPComms():
                                 self.addPeer(mac)
                                 self.e.send(mac,response)
                                 print(response)
-                                self.resetCounters()
+                                self.config.resetCounters()
                                 if not self.config.getMyMaster() and not self.config.isMaster():
                                     self.config.setMyMaster(mac.hex())
                             except Exception as ex: print('Can\'t respond',ex)
-                if self.requestToSend:
-                    self.sending=True
-                    while self.sending: await asyncio.sleep(.1)
+                    if self.requestToSend:
+                        self.sending=True
+                        while self.sending: await asyncio.sleep(.1)
+                else: print('Not active')
                 await asyncio.sleep(.1)
                 self.config.kickWatchdog()
 
@@ -157,8 +159,9 @@ class ESPComms():
         try: return self.e.peers_table[mac][0]
         except: return 0
 
-    def resetCounters(self):
-        if hasattr(self,'channels'): self.channels.resetCounters()
+    def restartESPNow(self):
+        self.e=ESPNow()
+        self.e.active(True)
 ```
 
 This code handles ESP-Now networking, which operates on the lowest levels of the OSI model. It job is to deliver small packets of data to specified MAC addresses, so it does not deal with IP addresses, access point names or any of the other higher layers.
@@ -167,7 +170,7 @@ ESP-Now requires the device to be already set up in either Access Point or Stati
 
 The code in this module is for a specific network scenario, where there is a single master and a number of slaves. The master (or hub) device connects to the house router with its station (STA) interface and the slaves do not (but they still require STA to be active for ESP-Now to work). Both master and slaves use the same code but use it in different ways. In both case an access point (AP) is set up for the first 2 minutes following a reboot, so that an administrator can talk directly to the device. This permits configuration changes to be made over-the-air from a local browser.
 
-The code here was developed with a lot of trial-and-error and the assistance of AI to find relevant examples. There turned out to be none that directly considered the complexities of the scenario; most are far simpler. If anyone else has solved the same problem they hadn't told the world about it at the time my own development was under way.
+The code here was developed with a lot of trial-and-error and the assistance of AI to find relevant examples. There turned out to be none that directly considered the complexities of the scenario; most are far simpler. If anyone else has solved the same problem they hadn't told the world about it at the time this code development was under way.
 
 ### `__init__()` ###
 This code makes use of a second module, "config", which handles system parameters such as route SSID/password and identifies which I/O pins are used by the device. This data is typically held in a JSON file that can be read and written as necessary. Wherever you see `config.xxxxx()` it's a function in the config module that's being called.

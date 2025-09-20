@@ -40,7 +40,9 @@ class Config():
         self.channel=int(self.config['channel'])
         self.master=self.config['master']
         if self.master: self.myMaster=''
-        else: self.myMaster=self.config['myMaster']
+        elif 'myMaster' in self.config:
+            self.myMaster=self.config['myMaster']
+        else: self.myMaster=''
         pin,invert=self.getPinInfo('led')
         self.led=PIN(self,pin,invert)
         pin,invert=self.getPinInfo('relay')
@@ -76,13 +78,16 @@ class Config():
         if self.dht22!=None: self.dht22.resume()
     
     def doFinalInitTasks(self):
+        print('Final startup tasks')
         self.server.startup()
         asyncio.create_task(self.espComms.receive())
         self.bleScan=BLEScan()
         asyncio.create_task(self.bleScan.scan())
-        if self.myMaster:
-            self.channels=Channels(self.espComms)
-            self.channels.init()
+        self.channels=Channels(self.espComms)
+        if not self.master: self.channels.setupSlaveTasks()
+
+    def resetCounters(self):
+        if hasattr(self,'channels'): self.channels.resetCounters()
 
     def setAP(self,ap): self.ap=ap
     def setSTA(self,sta): self.sta=sta
