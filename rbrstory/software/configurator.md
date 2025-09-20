@@ -22,7 +22,7 @@ When an RBR-Now device is installed into a product, the first thing is to flash 
 ```
 pip install adafruit-ampy
 ```
-Then run `ec flash-device.ecs', which downloads and installs Micropython and all the RBR Python scripts.
+Then run `ec flash-device.ecs`, which downloads and installs Micropython and all the RBR Python scripts.
 
 Once this is done you can power up the device. If you run it on Thonny you will see messages output as configuration proceeds, but in most cases you can just keep an eye on the status line in the configurator. When the device starts it will wait indefinitely to be configured. While doing so it publishes an access point on `http://192.168.9.1`, with an SSID `RBR-Now-xxxxxxxxxxxx`, where `xxxxxxxxxxxx` is the MAC address of the device. The password is `00000000` and you can log into it from a browser if you wish, but there's not much to see.
 
