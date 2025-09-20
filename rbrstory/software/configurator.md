@@ -34,7 +34,11 @@ Once the master is configured it restarts and powers up again doing its job. The
 
 With the master done, it's time to do the slaves. These are much simpler. For each one, power it up, click _Scan for devices_, wait for the popup, then click the device. Once the job is done it will appear in the Slave list, as in the picture above. Give each one a name and set the pin numbers as before.
 
-While the system is under control of the configurator, the system controller is blocked from making any changes. You can turn relays on and off from the configurator, then when you finally exit the program the system controller will take over again and restore them to their proper states.
+There are several other functions available through the configurator, such as updating the Python scripts on any of the known devices.
+
+## System interlock ##
+
+While the system is under control of the configurator, the system controller is blocked from making any changes. You can turn relays on and off from the configurator, then when you finally exit the program the system controller will take over again and restore them to their proper states. If your system appears to have stopped working, check to ensure the configurator is not running. One further note: if you exit the configurator by any means other than clicking the `Exit` button, your system controller will remain locked. To clear the block manually, type `rm /mnt/data/lock` on the system controller.
 
 ## The configurator script ##
 This is quite a large EasyCoder script, so I'll document it over the coming pages. We'll start at the top:
@@ -307,8 +311,8 @@ This is quite a large EasyCoder script, so I'll document it over the coming page
 ```
 At the start, the script names itself (for debugging) and requests the graphics subsystem. It then lists all the variables used. EasyCoder is a typed language so you can see the variables grouped into different types. EasyCoder commands are all-lowercase and variables start with a capital letter; this is not mandatory but it makes programs easier to read.
 
-The job of this part of the script is to set up the graphics environment. Most of it is quite self-evident, especially if you're familiar with Qt graphics, which power this part of EasyCoder. Evey visible component on the screen is named somewhere and many are given values to display. Some items are containers (layouts) and most of the others are items whose purpose is obvious from their types and names. Once this code has run, the UI will appear on the screen of the computer.
+The job of this part of the script is to set up the graphics environment. Most of it is quite self-evident, especially if you're familiar with Qt graphics, which power this part of EasyCoder. Every visible component on the screen is named somewhere and many are given values to display. Some items are containers (layouts) and most of the others are items whose purpose is obvious from their types and names. Once this code has run, the UI will appear on the screen of the computer.
 
-~tid:configurator02:The configurator, part 2~
+~tid:configurator-02:The configurator, part 2~
 
 ~stid:home/pagelist:List of Pages~
