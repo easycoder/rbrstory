@@ -27,9 +27,6 @@
 ~stid:software/webapp:The web application~  
 ~stid:software/configurator:The configuration application~
 
-## Setting up and configuration
-~sid:setup:Setting up and Configuration
-
 ## Subprojects ##
 ~sid:EC-PY:EasyCoder for Python~  
 ~sid:EC-JS:EasyCoder for JavaScript~  
