@@ -3,7 +3,7 @@
 The code is as follows:
 ```python
 import json,asyncio,machine
-from files import readFile,writeFile,fileExists
+from files import readFile,writeFile,fileExists,deleteFile
 from pin import PIN
 from server import Server
 from dht22 import DHT22
@@ -37,7 +37,8 @@ class Config():
             pin['pin']=''
             self.config['pins']['dht22']=pin
             writeFile('config.json',json.dumps(self.config))
-        self.channel=int(self.config['channel'])
+        try: self.channel=int(self.config['channel'])
+        except: self.channel=1
         self.master=self.config['master']
         if self.master: self.myMaster=''
         elif 'myMaster' in self.config:
@@ -71,6 +72,10 @@ class Config():
         print('Reset requested')
         self.resetRequested=True
     
+    def clearAndReset(self):
+        deleteFile('config.json')
+        machine.reset()
+    
     def pause(self):
         if self.dht22!=None: self.dht22.pause()
     
@@ -84,10 +89,13 @@ class Config():
         self.bleScan=BLEScan()
         asyncio.create_task(self.bleScan.scan())
         self.channels=Channels(self.espComms)
-        if not self.master: self.channels.setupSlaveTasks()
+        print('myMaster',self.myMaster)
+        if self.myMaster:
+            print('doit')
+            self.channels.setupSlaveTasks()
 
-    def resetCounters(self):
-        if hasattr(self,'channels'): self.channels.resetCounters()
+    def resetCounter(self):
+        if hasattr(self,'channels'): self.channels.resetCounter()
 
     def setAP(self,ap): self.ap=ap
     def setSTA(self,sta): self.sta=sta
@@ -122,7 +130,7 @@ class Config():
     def isMaster(self): return self.master
     def apIsOpen(self): return self.espComms.apIsOpen()
     def getDevice(self): return self.config['device']
-    def getName(self): return self.config['name']
+    def getName(self): return self.config['name'].replace(' ','_')
     def getSSID(self): return self.config['hostssid']
     def getPassword(self): return self.config['hostpass']
     def getMAC(self): return self.mac

@@ -14,7 +14,7 @@ A Room By Room system comprises one system controller and a number of devices to
 This is a small Linux computer. It is possible to use a device such as a Raspberry Pi or similar, but we have found them to be unreliable in the long term if they use an SD card for data storage. If the power is lost unexpectedly the computer can corrupt the SD card, making it unusable without a complete reinstall. For this reason we prefer a mini PC of some kind or other, with SSD storage. If this comes with a display then we can provide a user interface program to run on it; otherwise the only way to control the system is over the Internet with a smartphone or PC.
 
 ### ~tid:SSrelay:Relay modules~ ###
-This is based on the ESP32 microcontroller. It communicates with the system controller using wifi.
+These are based on the ESP32 microcontroller. They communicate with the system controller using wifi.
 
 ### ~tid:thermometer:Thermometer modules~ ###
 These come in two kinds. The battery-powered thermometer communicates with the system using Bluetooth. Batteries usually need to be changed at roughly yearly intervals. The mains-powered version needs no battery changes; it plugs into a nearby mains socket outlet and communicates using wifi.

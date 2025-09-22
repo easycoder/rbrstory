@@ -13,20 +13,27 @@ class ESPComms():
         
         if config.isMaster():
             print('Starting as master')
-            self.sta=network.WLAN(network.WLAN.IF_STA)
-            self.sta.active(True)
-            ssid=self.config.getSSID()
-            password=self.config.getPassword()
-            print(ssid,password)
-            print('Connecting...',end='')
-            self.sta.connect(ssid,password)
-            while not self.sta.isconnected():
-                time.sleep(1)
-                print('.',end='')
-            ipaddr=self.sta.ifconfig()[0]
-            self.channel=self.sta.config('channel')
-            self.config.setIPAddr(ipaddr)
-            print(f'{ipaddr} ch {self.channel}')
+            try:
+                self.sta=network.WLAN(network.WLAN.IF_STA)
+                self.sta.active(True)
+                ssid=self.config.getSSID()
+                password=self.config.getPassword()
+                print(ssid,password)
+                t=0
+                print('Connecting...',end='')
+                self.sta.connect(ssid,password)
+                while not self.sta.isconnected():
+                    time.sleep(1)
+                    t+=1
+                    if t>30:
+                        print('Timeout')
+                        config.clearAndReset()
+                    print('.',end='')
+                ipaddr=self.sta.ifconfig()[0]
+                self.channel=self.sta.config('channel')
+                self.config.setIPAddr(ipaddr)
+                print(f'{ipaddr} ch {self.channel}')
+            except: machine.reset()
         else:
             self.channel=config.getChannel()
             print('Starting as slave on channel',self.channel)
@@ -44,7 +51,6 @@ class ESPComms():
         if not config.isMaster():
             self.sta=network.WLAN(network.WLAN.IF_STA)
             self.sta.active(True)
-            self.sta.config(channel=self.channel)
         
         self.e.active(True)
         print('ESP-Now initialised')
@@ -104,7 +110,7 @@ class ESPComms():
                     if counter==0: result='Fail (no reply)'
                     else:
                         print(f'{msg[0:20]} to {mac}: {result}')
-                        self.config.resetCounters()
+                        self.config.resetCounter()
                 else: result='Fail (no result)'
             except Exception as ex:
                 result=f'Fail ({ex})'
@@ -144,7 +150,7 @@ class ESPComms():
                                 self.addPeer(mac)
                                 self.e.send(mac,response)
                                 print(response)
-                                self.config.resetCounters()
+                                self.config.resetCounter()
                                 if not self.config.getMyMaster() and not self.config.isMaster():
                                     self.config.setMyMaster(mac.hex())
                             except Exception as ex: print('Can\'t respond',ex)

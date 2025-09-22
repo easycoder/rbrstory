@@ -1,12 +1,12 @@
 # The RBR-Now configurator #
 
-Although RBR can handle a number of different types of hardware, the one that causes least problems with installation and maintenance is the RBR-Now device. This is an ESP32-based microcontroller driving either a relay or a thermometer (and other variants may appear in the future).
+Although RBR can handle a number of different types of hardware, the one that causes least problems with installation and maintenance is the XR device. This is an ESP32-based microcontroller driving either a relay or a thermometer (and other variants may appear in the future).
 
 The most important feature of RBR (apart from those the user sees every day) is that it can be mostly configured before delivery. Most home automation products have to be configured during installation, which often means setting up each one to connect to the house router. This is time-consuming and inconvenient. Sometimes the router itself changes, such as when the owner changes network provider, and the entire system has to be reprogrammed.
 
 The RBR-Now family of devices uses the ESP-Now networking protocol to run independently of the house system, can be set up before delivery and can be moved to another router with changes to only one item.
 
-Although the system can be set up manually for each device, doing so provides little to no confirmation that everything is as it should be. To make things simpler we provide the "configurator; an EasyCoder script that runs on a separate computer on the network. The computer must be Linux as it requires features that are not available on Windows. It is possible that a Linux subsystem could be used as there are not many such features; the main one is to scan the local network to find wifi access points. We have no knowledge of using a Mac but something similar might apply.
+Although the system can be set up manually for each device, it's quite a complex procedure, with little confirmation that the devices are set up properly. To make things simpler we provide the "configurator; an EasyCoder script that runs on a separate computer on the network. The computer must be Linux as it requires features that are not available on Windows. (It is possible that a Linux subsystem could be used as there are only a limited number of such features; the main one is to scan the local network to find wifi access points. We have no knowledge of using a Mac but something similar might apply.)
 
 Here's what the configurator looks like after starting up:
 ~img:RBRConf.png:center 100%~
@@ -18,7 +18,7 @@ In the bottom right-hand corner of the window is a status line that provides inf
 
 A newly-discovered system has no devices; the ones you see in the picture are for an existing system. On the left, _Scan for devices_ lets you add devices to the system, one by one. This is a complex procedure but the configurator takes care of it all.
 
-When an RBR-Now device is installed into a product, the first thing is to flash it with Micropython, taking care to pick the version for the particular variant of ESP32. Currently they are all ESP32-C3. See the Micropython website for instructions on how to do this on the command line, or you may find Thonny is able to do it. We provide an EasyCoder script, `flash-device.ecs`, that will do the job for you if the files are all in the right places. If you have downloaded the RBR repository this should be the case. The tool requires `adafruit-ampy` to be installed:
+When an XR device is installed into a product, the first thing is to flash it with Micropython, taking care to pick the version for the particular variant of ESP32. Currently they are all ESP32-C3. See the Micropython website for instructions on how to do this on the command line, or you may find Thonny is able to do it. We provide an EasyCoder script, `flash-device.ecs`, that will do the job for you if the files are all in the right places. If you have downloaded the RBR repository this should be the case. The tool requires `adafruit-ampy` to be installed:
 ```
 pip install adafruit-ampy
 ```
@@ -38,7 +38,7 @@ There are several other functions available through the configurator, such as up
 
 ## System interlock ##
 
-While the system is under control of the configurator, the system controller is blocked from making any changes. You can turn relays on and off from the configurator, then when you finally exit the program the system controller will take over again and restore them to their proper states. If your system appears to have stopped working, check to ensure the configurator is not running. One further note: if you exit the configurator by any means other than clicking the `Exit` button, your system controller will remain locked. To clear the block manually, type `rm /mnt/data/lock` on the system controller.
+While the system is under control of the configurator, the system controller is blocked from making any changes. You can turn relays on and off from the configurator, then when you finally exit the program the system controller will take over again and restore them to their proper states. If your system appears to have stopped working, check to ensure the configurator is not running. One further note: if you exit the configurator by any means other than clicking the `Exit` button, your system controller will remain locked. To clear the block manually, either open then close the configurator or type `rm /mnt/data/lock` on the system controller.
 
 ## The configurator script ##
 This is quite a large EasyCoder script, so I'll document it over the coming pages. We'll start at the top:
