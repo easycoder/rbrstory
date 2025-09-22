@@ -23,6 +23,7 @@
 &emsp;~stid:software/main:main.py Main program~  
 &emsp;~stid:software/pin:pin.py ESP32 I/O pins~  
 &emsp;~stid:software/server:server.py A small webserver~  
+~stid:software/data:Data storage~  
 ~stid:software/webserver:The web server~  
 ~stid:software/webapp:The web application~  
 ~stid:software/configurator:The configuration application~
