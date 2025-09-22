@@ -13,7 +13,7 @@ A Room By Room system comprises one system controller and a number of devices to
 ### ~tid:controller:The system controller~ ###
 This is a small Linux computer. It is possible to use a device such as a Raspberry Pi or similar, but we have found them to be unreliable in the long term if they use an SD card for data storage. If the power is lost unexpectedly the computer can corrupt the SD card, making it unusable without a complete reinstall. For this reason we prefer a mini PC of some kind or other, with SSD storage. If this comes with a display then we can provide a user interface program to run on it; otherwise the only way to control the system is over the Internet with a smartphone or PC.
 
-### ~tid:SSrelay:Relay modules~ ###
+### ~tid:relay:Relay modules~ ###
 These are based on the ESP32 microcontroller. They communicate with the system controller using wifi.
 
 ### ~tid:thermometer:Thermometer modules~ ###
@@ -22,14 +22,9 @@ These come in two kinds. The battery-powered thermometer communicates with the s
 ## System software ##
 The system software is distributed among the system controller, the relays and thermometers, the RBR website and a web application that runs on a smartphone. Here are links to the various pages describing each software component.
 
-~sid:software:Introduction~
-
-~stid:software/controller:The controller software~
-
-~stid:software/devices:The device software~
-
-~stid:software/webserver:The web server~
-
-~stid:software/webapp:The web application~
-
+~sid:software:Introduction~  
+~stid:software/controller:The controller software~  
+~stid:software/devices:The device software~  
+~stid:software/webserver:The web server~  
+~stid:software/webapp:The web application~  
 ~stid:home/pagelist:List of Pages~

@@ -10,7 +10,7 @@ The box houses an ESP32-C3 microcontroller attached to a mains relay. Power ente
 
 The latter 2 positions provide a manual override in case of system failures of one kind or another.
 
-The XR relay communicates with the system controller using ESP-Now, a wifi networking protocol designed for ESP devices that operates independently of HTTP and other wifi traffic. A main benefit of using them is that the system can be preconfigured before delivery, reducing the amount of work to be done on the premises. They also provide information about their current state, signal levels and the time since last being reset, all of which is viewable remotely.
+The XR relay communicates with the system controller using ESP-Now, a wifi networking protocol designed for ESP devices that operates independently of HTTP and other wifi traffic. A main benefit of using XR devices is that the system can be preconfigured before delivery, reducing the amount of work to be done on the premises. They also provide information about their current state, signal levels and the time since last being reset, all of which is viewable remotely.
 
 ~sid:hardware:The Room By Room hardware~  
 ~stid:home/pagelist:List of Pages~
