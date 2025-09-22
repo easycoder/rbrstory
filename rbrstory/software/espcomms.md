@@ -179,7 +179,7 @@ The code in this module is for a specific network scenario, where there is a sin
 The code here was developed with a lot of trial-and-error and the assistance of AI to find relevant examples. There turned out to be none that directly considered the complexities of the scenario; most are far simpler. If anyone else has solved the same problem they hadn't told the world about it at the time this code development was under way.
 
 ### `__init__()` ###
-This code makes use of a second module, "config", which handles system parameters such as route SSID/password and identifies which I/O pins are used by the device. This data is typically held in a JSON file that can be read and written as necessary. Wherever you see `config.xxxxx()` it's a function in the config module that's being called.
+This code makes use of a `config` module, which handles system parameters such as route SSID/password and identifies which I/O pins are used by the device. This data is typically held in a JSON file that can be read and written as necessary. Wherever you see `config.xxxxx()` it's a function in the config module that's being called.
 
 ESP-Now is extremely fusy about configuration. There may be differences between different variants of ESP32; this code is known to work on ESP32-C3, which is a fairly basic model, so it ought to be fine on most other variants. There is a strict sequence to follow, which differs between master and slave.
 
