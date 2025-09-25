@@ -4,7 +4,7 @@ This project, called Room By Room Heating, is part of the [EasyCoder](https:/eas
 
 The specific subprojects are as follows:
 
- 1. ~sid:hardware:Room By Room~ is the product itself. It has a website at [https://rbrheating.com](https://rbrheating.com) but this is intended for use mainly by the system itself, as a means to store data and communicate between its various parts. The system comprises a controller PC running Python and a network of devices mostly based on the ESP32 microcontroller running Micropython. The repository is at [https://github.com/easycoder/rbr](https://github.com/easycoder/rbr).
+ 1. ~tid:overview:Room By Room~ is the product itself. It has a website at [https://rbrheating.com](https://rbrheating.com) but this is intended for use mainly by the system itself, as a means to store data and communicate between its various parts. The system comprises a controller PC running Python and a network of devices mostly based on the ESP32 microcontroller running Micropython. The repository is at [https://github.com/easycoder/rbr](https://github.com/easycoder/rbr).
 
  2. ~sid:EC-PY:EasyCoder for Python~ is a domain-specific programming language (a DSL) designed to ease the coding of projects such as this. The language is written in Python and comprises English-like commands to do general-purpose programming and to control the system hardware. The logic of the system controller is written using this language. Its repository is at [https://github.com/easycoder/easycoder-py](https://github.com/easycoder/easycoder-py).
 
