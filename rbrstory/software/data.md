@@ -29,7 +29,10 @@ The controller's "hard drive" holds all the program files, which are seldom chan
 As the main system control script runs, it uses data from the ramdisk to decide which radiators should be on and which should be off, and having sent the necessary commands to make it happen, informs the server of the current state of the system.
 
 ## Configuration data ##
-Although the configurator can run on the system controller itself, this will rarely happen, not least because the device is unlikely to have a keyboard. Configuration will normally take place on a computer or laptop on the same network, which will use SSH to directly access files on the controller. The XR configurator is able to handle multiple installations, in which case it will hold configuration data for each of the systems. This data is read from the server, but a file at `{home}/.rbr.conf` is created by the configurator to hold the data for all the managed systems
+Although the XR configurator can run on the system controller itself, this will rarely happen, not least because the device is unlikely to have a keyboard. Configuration will normally take place on a computer or laptop on the same network, which will use SSH to directly access files on the controller. The configurator is able to handle multiple installations, in which case it will hold configuration data for each of the systems. This data is read from the server, but a file at `{home}/.rbr.conf` is created by the configurator to hold the data for all the managed systems.
+
+## The system map ##
+(to be written)
 
 ~tid:devices:The device software~  
 ~stid:home/pagelist:List of Pages~
