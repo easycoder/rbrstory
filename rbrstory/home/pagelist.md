@@ -1,7 +1,8 @@
 # List of Pages
 ~sid:home:Introduction~  
 ~stid:home/overview:System overview~  
-~stid:home/architecture:System architecture~
+~stid:home/architecture:System architecture~  
+~stid:home/strategy:Configuration strategy~
 
 ## The Room By Room hardware ##
 ~sid:hardware:Introduction~  
