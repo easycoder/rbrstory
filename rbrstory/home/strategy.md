@@ -19,7 +19,7 @@ There are two main types of data held in the system. One is the "system map", wh
 
 ### The system map ###
 The map holds one or more room lists, known as "profiles". These are completely independent of each other, so you could in principle have a completely different set of rooms named in two different profiles. This isn't something that's likely to be needed, but it's possible. A more likely use of profiles is to have a timing pattern that is different at weekends to the one that applies on Monday through Friday. This is such a common scenario that the system also implements a weekly calendar, which appears as a table that specifies which profile should apply on each day of the week.
-~img:calendar.jpeg:center 80%~
+~img:calendar.jpeg:center 40%~
 The system map, held in the RBR database for each installation, is used by the system controller to decide when to turn on and off the radiators in the rooms covered by the current profile. Editing facilities are provided on the local and the remote user interfaces, intended for use by the occupants of the property in question. The system controller continually runs a script that examines the map, reads the current temperature data received from the network and sends commands to turn radiators on or off.
 
 ### Configuration data ###
