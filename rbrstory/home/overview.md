@@ -19,7 +19,7 @@ One of the biggest sources of heat wastage is in heating rooms that are not in u
 The user interface should present informaiton clearly and simply without requiring any tehnical knowledge to operate. The main screen should present a clear view of the entire system, showing which rooms are being heated and when the next program change will occur. Room-specific functionality can be implemented with popup windows that open in response to taps on large buttons on the main screen.
 
 **Simple to install**  
-The system should require the minimum of electrical and plumbing work to install. Electrical work is limited to running cables from power sockets to radiators, which will all have a small control box near them. Radiators will have to be already fitted with TRVs; if this is not already thecase then a plumber will be needed to change the valves. See ~tid:comms:Installation and comms~.
+The system should require the minimum of electrical and plumbing work to install. Electrical work is limited to running cables from power sockets to radiators, which will all have a small control box near them. Radiators will have to be already fitted with TRVs; if this is not already the case then a plumber will be needed to change the valves. See ~tid:comms:Installation and comms~.
 
 **Its cost can be recovered quickly from the savings made by using it**  
 It should be possible to save anything from 10% to 30% of annual heating cost by only heating rooms when they are needed. The saving in energy cost should cover the installation cost of the system within a couple of years.
