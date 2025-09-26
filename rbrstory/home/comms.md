@@ -1,4 +1,4 @@
-# The comms strategy #
+# Installation and comms #
 
 One of the key attributes of the RBR system, as outlined in the ~tid:overview:System overview~, is that it is easy to install. A complete system requires three main items in every room to be controlled:
 
