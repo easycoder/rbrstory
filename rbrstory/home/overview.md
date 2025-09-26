@@ -27,6 +27,7 @@ It should be possible to save anything from 10% to 30% of annual heating cost by
 **Remote maintenance that can be delegated**  
 Not everyone is able to operate equipment of this type. Those with disabilities such as poor sight or mobility often cannot operate touchscreens, so someone else will have to look after the system. Remotely management is important, as is the ability of a carer or maintenance person to look after several systems. How this is done is up to those individuals or organisations; the system should provide all the features they may need.
 
+~tid:architecture:System architecture~  
 ~sid:hardware:System hardware~  
 ~sid:software:System software~  
 ~tid:pagelist:List of Pages~
